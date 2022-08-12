@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/3.8.3/superagent.min.js"></script>
+<style>
+   .card{
+       background-color: rgb(136, 153, 153);
+       width: 450px;
+       display: inline-block;
+       padding: 10px;
+       justify-content: center;
+       align-items: 'center';
+    } 
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="addUser.html"
+                >Add User <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="addUsers.html">Add Users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="allUsers.html">All Users (Formatted)</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="data.html">Raw Data</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <div style="padding:50px">     
+        <button class="btn btn-primary" style="font-size: 3em;" onclick="data()">Show All Data</button><br>
+        <div id="status"  ></div>        
+    
+<script>
+ 
+function data() {
+    var status  = document.getElementById('status');
+    var url = '/data';
+ 
+    superagent
+        .get(url)
+        .end(function(err,res){
+            if(err){
+                console.log(err);
+            }
+            else{
+                // console.log(res);
+                const arr=JSON.stringify(res.body);
+                const a=JSON.parse(arr)
+                // console.log(typeof(a));
+                // console.log(a[0]);
+                // arr.push()
+                // for(l)
+                // status.innerHTML = arr;
+                // var container = document.getElementById("s");
+                for(let i=0;i<a.length;i++){
+                    var el = document.createElement("div");
+                    el.className ="card";
+                    el.id = "card" ;
+                    el.innerHTML = JSON.stringify(a[i]);
+                    status.append(el);
+                }
+                // a.foreach(item=>{
+                // 	var el = document.createElement("div");
+                //     el.className ="card";
+                //     el.id = "card" ;
+                //     el.innerHTML = item;
+                //     status.append(el);
+                // })
+                }
+        });
+}
+ 
+</script>
+</body>
+</html>
