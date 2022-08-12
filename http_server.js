@@ -70,7 +70,7 @@ app.post('/adduser', function(req, res){
     // console.log(db.get('users').value());
     res.send(db.get('users').value());
 });
- var port=process.env.port || 3000
+ var port=process.env.PORT || 3000
  // start server
 // -----------------------
 app.listen(port, function(){
